@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Swift Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Admin Login</h2>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            class="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 focus:ring-blue-500 focus:border-blue-500 transition" 
+            placeholder="Enter your username" 
+            required 
+          />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 focus:ring-blue-500 focus:border-blue-500 transition" 
+            placeholder="Enter your password" 
+            required 
+          />
+        </div>
+        <button 
+          type="submit" 
+          class="w-full bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        >
+          Login
+        </button>
+      </form>
+      <div id="error-message" class="text-sm text-red-600 mt-4 hidden">
+        Invalid username or password
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(document.getElementById('login-form'));
+
+        fetch('loginHandler.php', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              window.location.href = 'dashboard.html';
+            } else {
+              const errorMessage = document.getElementById('error-message');
+              errorMessage.innerText = data.message;
+              errorMessage.classList.remove('hidden');
+            }
+          })
+          .catch(error => {
+            console.error('Error logging in:', error);
+          });
+      });
+    </script>
+  </body>
+</html>

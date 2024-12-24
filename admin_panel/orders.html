@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <aside class="bg-gray-800 text-white w-64 space-y-6 py-6 px-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 px-4">
+          <img src="../image/swift cart.png" alt="Logo" class="w-8 h-8" />
+          <span class="text-2xl font-semibold">Swift Cart </span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav>
+          <a
+            href="./dashboard.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >🏠 Dashboard</a
+          >
+          <a
+            href="./orders.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >📦 Orders</a
+          >
+          <a
+            href="./products.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >🛒 Products</a
+          >
+          <a href="#" class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >📂 Categories</a
+          >
+          <a
+            href="./customers.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >👤 Customers</a
+          >
+          <a href="#" class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >📈 Reports</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <header
+          class="bg-white shadow-md p-4 flex justify-between items-center"
+        >
+          <h1 class="text-xl font-semibold">Orders</h1>
+          <div class="flex space-x-2">
+            <button
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              + Add Order
+            </button>
+            <button class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
+              Filter
+            </button>
+            <input
+              type="text"
+              placeholder="Search..."
+              class="border px-4 py-2 rounded"
+            />
+          </div>
+        </header>
+
+        <!-- Orders Table -->
+        <main class="p-4 bg-gray-100 flex-1">
+          <div class="bg-white rounded shadow">
+            <!-- Table -->
+            <table class="w-full text-left">
+              <thead>
+                <tr class="text-gray-600 border-b bg-gray-50">
+                  <th class="py-3 px-4"><input type="checkbox" /></th>
+                  <th class="py-3 px-4">Order</th>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Customer</th>
+                  <th class="py-3 px-4">Payment Status</th>
+                  <th class="py-3 px-4">Order Status</th>
+                  <th class="py-3 px-4">Total</th>
+                  <th class="py-3 px-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 20 Order Rows -->
+                <!-- Repeated rows -->
+                <!-- Example for 20 rows -->
+                <script>
+                  const orders = [
+                    {
+                      id: "#12501A",
+                      date: "May 1, 3:30 PM",
+                      customer: "Alice Brown",
+                      payment: "Paid",
+                      status: "Ready",
+                      total: "$25.00",
+                    },
+                    {
+                      id: "#12502B",
+                      date: "May 2, 11:00 AM",
+                      customer: "Bob Smith",
+                      payment: "Unpaid",
+                      status: "Pending",
+                      total: "$40.00",
+                    },
+                    {
+                      id: "#12503C",
+                      date: "May 2, 1:30 PM",
+                      customer: "Charlie Davis",
+                      payment: "Paid",
+                      status: "Shipped",
+                      total: "$65.00",
+                    },
+                    {
+                      id: "#12504D",
+                      date: "May 3, 4:20 PM",
+                      customer: "Diana Green",
+                      payment: "Paid",
+                      status: "Delivered",
+                      total: "$35.50",
+                    },
+                    {
+                      id: "#12505E",
+                      date: "May 3, 5:00 PM",
+                      customer: "Evan Harris",
+                      payment: "Unpaid",
+                      status: "Pending",
+                      total: "$29.99",
+                    },
+                    {
+                      id: "#12506F",
+                      date: "May 4, 2:10 PM",
+                      customer: "Fiona Jackson",
+                      payment: "Paid",
+                      status: "Ready",
+                      total: "$48.00",
+                    },
+                    {
+                      id: "#12507G",
+                      date: "May 4, 6:15 PM",
+                      customer: "George King",
+                      payment: "Paid",
+                      status: "Shipped",
+                      total: "$99.00",
+                    },
+                    {
+                      id: "#12508H",
+                      date: "May 5, 8:45 AM",
+                      customer: "Hannah Lee",
+                      payment: "Paid",
+                      status: "Delivered",
+                      total: "$55.00",
+                    },
+                    {
+                      id: "#12509I",
+                      date: "May 5, 9:30 AM",
+                      customer: "Ian Miller",
+                      payment: "Unpaid",
+                      status: "Pending",
+                      total: "$12.00",
+                    },
+                    {
+                      id: "#12510J",
+                      date: "May 5, 11:00 AM",
+                      customer: "Jane Norton",
+                      payment: "Paid",
+                      status: "Ready",
+                      total: "$72.00",
+                    },
+                    {
+                      id: "#12511K",
+                      date: "May 5, 12:00 PM",
+                      customer: "Kevin O'Connor",
+                      payment: "Paid",
+                      status: "Shipped",
+                      total: "$15.99",
+                    },
+                    {
+                      id: "#12512L",
+                      date: "May 6, 1:00 PM",
+                      customer: "Laura Parker",
+                      payment: "Unpaid",
+                      status: "Pending",
+                      total: "$18.00",
+                    },
+                    {
+                      id: "#12513M",
+                      date: "May 6, 2:15 PM",
+                      customer: "Mike Quinn",
+                      payment: "Paid",
+                      status: "Delivered",
+                      total: "$20.50",
+                    },
+                    {
+                      id: "#12514N",
+                      date: "May 6, 3:45 PM",
+                      customer: "Nancy Reed",
+                      payment: "Paid",
+                      status: "Ready",
+                      total: "$60.00",
+                    },
+                    {
+                      id: "#12515O",
+                      date: "May 6, 5:10 PM",
+                      customer: "Oliver Scott",
+                      payment: "Paid",
+                      status: "Shipped",
+                      total: "$70.00",
+                    },
+                    {
+                      id: "#12516P",
+                      date: "May 7, 9:00 AM",
+                      customer: "Paula Taylor",
+                      payment: "Unpaid",
+                      status: "Pending",
+                      total: "$90.00",
+                    },
+                    {
+                      id: "#12517Q",
+                      date: "May 7, 11:15 AM",
+                      customer: "Quinn Underwood",
+                      payment: "Paid",
+                      status: "Ready",
+                      total: "$80.00",
+                    },
+                    {
+                      id: "#12518R",
+                      date: "May 7, 1:30 PM",
+                      customer: "Rachel Vincent",
+                      payment: "Paid",
+                      status: "Delivered",
+                      total: "$45.00",
+                    },
+                    {
+                      id: "#12519S",
+                      date: "May 7, 3:45 PM",
+                      customer: "Sam White",
+                      payment: "Unpaid",
+                      status: "Pending",
+                      total: "$33.00",
+                    },
+                    {
+                      id: "#12520T",
+                      date: "May 7, 6:00 PM",
+                      customer: "Tina Young",
+                      payment: "Paid",
+                      status: "Shipped",
+                      total: "$75.00",
+                    },
+                  ];
+
+                  document.write(
+                    orders
+                      .map(
+                        (order) => `
+                    <tr class="hover:bg-gray-50">
+                      <td class="py-3 px-4"><input type="checkbox" /></td>
+                      <td class="py-3 px-4 text-blue-600">${order.id}</td>
+                      <td class="py-3 px-4">${order.date}</td>
+                      <td class="py-3 px-4">${order.customer}</td>
+                      <td class="py-3 px-4">
+                        <span class="${order.payment === "Paid" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} px-2 py-1 rounded text-xs">
+                          ${order.payment}
+                        </span>
+                      </td>
+                      <td class="py-3 px-4">
+                        <span class="${order.status === "Pending" ? "bg-yellow-100 text-yellow-700" : "bg-orange-100 text-orange-700"} px-2 py-1 rounded text-xs">
+                          ${order.status}
+                        </span>
+                      </td>
+                      <td class="py-3 px-4">${order.total}</td>
+                      <td class="py-3 px-4 space-x-2">
+                        <button class="text-blue-600 hover:text-blue-800">✏️</button>
+                        <button class="text-red-600 hover:text-red-800">🗑️</button>
+                      </td>
+                    </tr>
+                  `
+                      )
+                      .join("")
+                  );
+                </script>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

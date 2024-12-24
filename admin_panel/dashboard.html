@@ -1,0 +1,209 @@
+<?php include 'session_check.php'; ?>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Swift Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Sidebar Transition */
+      #sidebar {
+        transition: transform 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Main Container -->
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="bg-gray-800 text-white w-64 space-y-6 py-6 px-4 absolute md:relative inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative z-10"
+      >
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 px-4">
+          <img src="../image/swift cart.png" alt="Logo" class="w-8 h-8" />
+          <span class="text-2xl font-semibold">Swift Cart </span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav>
+          <a href="./dashboard.html" class="block px-4 py-2 bg-blue-700 rounded"
+            >🏠 Dashboard</a
+          >
+          <a
+            href="./orders.html"
+            class="block px-4 py-2 hover:bg-blue-700 rounded"
+            >📦 Orders</a
+          >
+          <a
+            href="./products.html"
+            class="block px-4 py-2 hover:bg-blue-700 rounded"
+            >🛒 Products</a
+          >
+          <a href="#" class="block px-4 py-2 hover:bg-blue-700 rounded"
+            >📂 Categories</a
+          >
+          <a
+            href="./customers.html"
+            class="block px-4 py-2 hover:bg-blue-700 rounded"
+            >👤 Customers</a
+          >
+          <a href="#" class="block px-4 py-2 hover:bg-blue-700 rounded"
+            >📈 Reports</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col">
+        <!-- Top Navbar -->
+        <header class="bg-white shadow-md">
+          <div class="flex justify-between items-center p-4 md:px-8">
+            <!-- Logo and Hamburger -->
+            <div class="flex items-center space-x-4">
+              <button
+                id="menu-btn"
+                class="text-gray-700 md:hidden focus:outline-none"
+                onclick="toggleSidebar()"
+              >
+                ☰
+              </button>
+              <span class="text-xl font-semibold text-gray-800">Dashboard</span>
+            </div>
+
+            <!-- Icons and Manage Button -->
+            <div class="flex items-center space-x-4">
+              <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+                ✉️
+              </button>
+              <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+                🔔
+              </button>
+              <a href="./login.html"
+                ><button
+                  class="bg-blue-600 text-white px-4 py-1 rounded-full hover:bg-blue-700"
+                >
+                  LogOut
+                </button></a
+              >
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <main class="p-4 md:p-6 bg-gray-100">
+          <!-- Cards Section -->
+          <div
+            class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6"
+          >
+            <div class="bg-white p-6 rounded-lg shadow w-full">
+              <h2 class="text-gray-500 text-sm">Total Revenue</h2>
+              <p class="text-3xl font-bold text-gray-800">$10.54</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow w-full">
+              <h2 class="text-gray-500 text-sm">Orders</h2>
+              <p class="text-3xl font-bold text-gray-800">1,056</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow w-full">
+              <h2 class="text-gray-500 text-sm">Unique Visits</h2>
+              <p class="text-3xl font-bold text-gray-800">5,420</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow w-full">
+              <h2 class="text-gray-500 text-sm">New Users</h2>
+              <p class="text-3xl font-bold text-gray-800">1,650</p>
+            </div>
+          </div>
+
+          <!-- Graph and Last 7 Days -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Orders Over Time Graph -->
+            <div class="bg-white p-6 rounded-lg shadow col-span-2">
+              <h2 class="text-lg font-semibold mb-4 text-gray-800">
+                Orders Over Time
+              </h2>
+              <div
+                class="h-60 bg-gray-200 rounded-lg flex items-center justify-center"
+              >
+                <span class="text-gray-600">Graph Placeholder</span>
+              </div>
+            </div>
+
+            <!-- Last 7 Days Sales -->
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-lg font-semibold mb-4 text-gray-800">
+                Last 7 Days Sales
+              </h2>
+              <div
+                class="h-60 bg-gray-200 rounded-lg flex items-center justify-center"
+              >
+                <span class="text-gray-600">Progress Graph</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transactions and Top Products -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <!-- Recent Transactions -->
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-lg font-semibold mb-4 text-gray-800">
+                Recent Transactions
+              </h2>
+              <table class="w-full text-sm text-left">
+                <thead>
+                  <tr class="text-gray-600 border-b">
+                    <th class="pb-2">Name</th>
+                    <th class="pb-2">Amount</th>
+                    <th class="pb-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-2">Jaganath S.</td>
+                    <td class="py-2">$124.97</td>
+                    <td class="py-2 text-green-500">Paid</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-2">Anand G.</td>
+                    <td class="py-2">$55.42</td>
+                    <td class="py-2 text-yellow-500">Pending</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Top Products -->
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-lg font-semibold mb-4 text-gray-800">
+                Top Products by Units Sold
+              </h2>
+              <ul>
+                <li
+                  class="flex justify-between py-2 border-b text-gray-700 hover:bg-gray-50"
+                >
+                  <span>Men Grey Hoodie</span>
+                  <span class="font-bold">204</span>
+                </li>
+                <li
+                  class="flex justify-between py-2 border-b text-gray-700 hover:bg-gray-50"
+                >
+                  <span>Women Striped T-Shirt</span>
+                  <span class="font-bold">155</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        document
+          .getElementById("sidebar")
+          .classList.toggle("-translate-x-full");
+      }
+    </script>
+  </body>
+</html>

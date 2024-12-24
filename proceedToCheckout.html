@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      body {
+        background-color: #f8fafc; /* Light background */
+      }
+      .card {
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+      .notification {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-white shadow-md">
+      <div class="container mx-auto flex justify-between items-center p-6">
+        <a href="index.html" class="text-2xl font-bold">
+          <h1 class="text-2xl font-bold tracking-wide">Swift Cart</h1>
+        </a>
+      </div>
+    </header>
+
+
+    <main class="container mx-auto py-12">
+      <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">
+        Checkout
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Address Form Section -->
+        <div class="card bg-white rounded-lg p-8 shadow-lg mx-auto max-w-2xl">
+          <h2
+            class="text-2xl font-semibold mb-4 flex items-center text-gray-800"
+          >
+            <i class="fas fa-map-marker-alt text-green-500 mr-3"></i>Billing
+            Address
+          </h2>
+          <form id="checkout-form">
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-medium text-gray-600"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-medium text-gray-600"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="address"
+                class="block text-sm font-medium text-gray-600"
+                >Shipping Address</label
+              >
+              <textarea
+                id="address"
+                name="address"
+                rows="3"
+                required
+                class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+              ></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label
+                  for="city"
+                  class="block text-sm font-medium text-gray-600"
+                  >City</label
+                >
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  required
+                  class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+                />
+              </div>
+              <div>
+                <label
+                  for="postal-code"
+                  class="block text-sm font-medium text-gray-600"
+                  >Postal Code</label
+                >
+                <input
+                  type="text"
+                  id="postal-code"
+                  name="postal-code"
+                  required
+                  class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        <!-- Billing Method Section -->
+        <div class="card bg-white rounded-lg p-8 shadow-lg mx-auto max-w-2xl">
+          <h2
+            class="text-2xl font-semibold mb-4 flex items-center text-gray-800"
+          >
+            <i class="fas fa-credit-card text-green-500 mr-3"></i>Payment Method
+          </h2>
+          <form>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-600"
+                >Select Payment Method</label
+              >
+              <select
+                id="payment-method"
+                name="payment-method"
+                required
+                class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+              >
+                <option value="">Choose a payment method</option>
+                <option value="credit-card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank-transfer">Bank Transfer</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label
+                for="card-number"
+                class="block text-sm font-medium text-gray-600"
+                >Card Number</label
+              >
+              <input
+                type="text"
+                id="card-number"
+                name="card-number"
+                required
+                class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+              />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label
+                  for="expiry-date"
+                  class="block text-sm font-medium text-gray-600"
+                  >Expiry Date</label
+                >
+                <input
+                  type="text"
+                  id="expiry-date"
+                  name="expiry-date"
+                  placeholder="MM/YY"
+                  required
+                  class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+                />
+              </div>
+              <div>
+                <label for="cvc" class="block text-sm font-medium text-gray-600"
+                  >CVC</label
+                >
+                <input
+                  type="text"
+                  id="cvc"
+                  name="cvc"
+                  required
+                  class="mt-1 block w-full border-gray-300 bg-gray-50 text-gray-800 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition duration-300 p-3"
+                />
+              </div>
+            </div>
+            <button
+              type="button"
+              id="complete-purchase"
+              class="w-full bg-gradient-to-r from-green-500 to-green-700 text-white py-3 rounded-md hover:opacity-90 transition duration-300"
+            >
+              Complete Purchase
+            </button>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Notification Section -->
+      <div
+        class="notification fixed top-0 right-0 mt-4 mr-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-transform transform translate-y-[-100%]"
+        id="notification"
+      >
+        <div class="flex items-center">
+          <i class="fas fa-check-circle mr-2"></i>
+          <div>
+            <p>Your purchase was successful!</p>
+            <p class="font-bold" id="amount"></p>
+            <button
+              id="download-invoice"
+              class="mt-2 inline-flex items-center justify-center px-4 py-2 bg-white text-green-600 font-bold rounded-md hover:bg-gray-200 transition duration-200"
+            >
+              Download Invoice
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+    <footer class="bg-white text-gray-600 py-4">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2024 Swift Cart. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+
+    <script>
+      // Retrieve cart details from localStorage
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const purchaseAmount = localStorage.getItem("cartTotal") || "৳ 0.00"; // Retrieve total from localStorage
+      const purchaseDate = new Date().toLocaleDateString();
+      const shopAddress = "123 Shop St, City, Country";
+      const userAddress = "456 User Rd, City, Country";
+
+
+      function generateInvoice() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const logo = "data:image/png;base64,YOUR_BASE64_ENCODED_LOGO"; // Replace with your base64 encoded logo
+
+
+        // Add logo
+        doc.addImage(logo, "PNG", 10, 10, 50, 20); // Adjust dimensions and position as needed
+        doc.setFontSize(20);
+        doc.text("Invoice", 60, 20);
+        doc.setFontSize(12);
+        doc.text(`Purchase Date: ${purchaseDate}`, 10, 40);
+        doc.text(`Shop Address: ${shopAddress}`, 10, 50);
+        doc.text(`User Address: ${userAddress}`, 10, 60);
+
+
+        // Add product details
+        doc.setFontSize(14);
+        doc.text("Products:", 10, 80);
+        cart.forEach((product, index) => {
+          const yPosition = 90 + index * 10;
+          doc.text(
+            `${product.name} - Quantity: ${product.quantity}, Price: ৳${product.price}`,
+            10,
+            yPosition
+          );
+        });
+
+
+        doc.setFontSize(16);
+        doc.text(
+          `Total Amount: ৳${purchaseAmount}`,
+          10,
+          100 + cart.length * 10
+        );
+        doc.text("Thank you for your purchase!", 10, 110 + cart.length * 10);
+        doc.save("invoice.pdf"); // Save PDF
+      }
+
+
+      document
+        .getElementById("complete-purchase")
+        .addEventListener("click", function () {
+          // Show notification
+          const notification = document.getElementById("notification");
+          notification.style.display = "block";
+          notification.style.transform = "translateY(0)";
+
+
+          // Set the amount in the notification
+          document.getElementById("amount").innerText =
+            `Total Amount: ৳${purchaseAmount}`;
+
+
+          // Generate invoice PDF
+          generateInvoice();
+
+
+          // Automatically hide the notification after 10 seconds
+          setTimeout(() => {
+            notification.style.transform = "translateY(-100%)";
+            setTimeout(() => {
+              notification.style.display = "none";
+              // Clear the cart
+              localStorage.removeItem("cart");
+              localStorage.removeItem("cartTotal");
+              // Redirect to index.html
+              window.location.href = "index.html";
+            }, 300); // Wait for transition to finish before hiding
+          }, 10000);
+        });
+
+
+      // Download invoice button event
+      document
+        .getElementById("download-invoice")
+        .addEventListener("click", function () {
+          generateInvoice();
+        });
+    </script>
+  </body>
+</html>
+
+
+
+

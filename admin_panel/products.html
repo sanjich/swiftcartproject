@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <aside class="bg-gray-800 text-white w-64 space-y-6 py-6 px-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 px-4">
+          <img src="../image/swift cart.png" alt="Logo" class="w-8 h-8" />
+          <span class="text-2xl font-semibold">Swift Cart </span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav>
+          <a
+            href="./dashboard.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >🏠 Dashboard</a
+          >
+          <a
+            href="./orders.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >📦 Orders</a
+          >
+          <a href="./products.html" class="block py-2 px-4 bg-blue-700 rounded"
+            >🛒 Products</a
+          >
+          <a href="#" class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >📂 Categories</a
+          >
+          <a
+            href="./customers.html"
+            class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >👤 Customers</a
+          >
+          <a href="#" class="block py-2 px-4 hover:bg-blue-700 rounded"
+            >📈 Reports</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <header
+          class="bg-white shadow-md p-4 flex justify-between items-center"
+        >
+          <h1 class="text-xl font-semibold">Products</h1>
+          <div class="flex space-x-2">
+            <button class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
+              Filter
+            </button>
+            <input
+              type="text"
+              placeholder="Search..."
+              class="border px-4 py-2 rounded"
+            />
+            <button
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              onclick="openModal()"
+            >
+              + Add Product
+            </button>
+          </div>
+        </header>
+
+        <!-- Products Table -->
+        <main class="p-4 bg-gray-100 flex-1">
+          <div class="bg-white rounded shadow">
+            <!-- Table -->
+            <table class="w-full text-left">
+              <thead>
+                <tr class="text-gray-600 border-b bg-gray-50">
+                  <th class="py-3 px-4">
+                    <input type="checkbox" />
+                  </th>
+                  <th class="py-3 px-4">Product</th>
+                  <th class="py-3 px-4">Inventory</th>
+                  <th class="py-3 px-4">Color</th>
+                  <th class="py-3 px-4">Price</th>
+                  <th class="py-3 px-4">Rating</th>
+                  <th class="py-3 px-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="product-list">
+                <!-- Products will be loaded here dynamically -->
+              </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="p-4 flex justify-between items-center bg-gray-50">
+              <span>146 Results</span>
+              <div class="space-x-2">
+                <button class="px-3 py-1 border rounded hover:bg-gray-200">
+                  &lt;
+                </button>
+                <button class="px-3 py-1 bg-blue-600 text-white rounded">
+                  2
+                </button>
+                <button class="px-3 py-1 border rounded hover:bg-gray-200">
+                  3
+                </button>
+                <button class="px-3 py-1 border rounded hover:bg-gray-200">
+                  4
+                </button>
+                <button class="px-3 py-1 border rounded hover:bg-gray-200">
+                  &gt;
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden"
+    >
+      <div class="bg-white p-6 rounded shadow-lg w-1/3">
+        <h2 class="text-xl font-semibold mb-4" id="modal-title">Add Product</h2>
+        <form id="product-form">
+          <input type="hidden" id="product-id" name="id" />
+          <div class="mb-4">
+            <label class="block text-gray-700">Product Image URL</label>
+            <input
+              type="text"
+              id="product-image-url"
+              name="product_image_url"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Product Name</label>
+            <input
+              type="text"
+              id="product-name"
+              name="product_name"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Product Price</label>
+            <input
+              type="text"
+              id="product-price"
+              name="product_price"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Product Color</label>
+            <input
+              type="text"
+              id="product-color"
+              name="product_color"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Inventory</label>
+            <input
+              type="text"
+              id="product-inventory"
+              name="product_inventory"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Rating</label>
+            <input
+              type="text"
+              id="product-rating"
+              name="product_rating"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+
+          <div class="flex justify-end space-x-2">
+            <button
+              type="button"
+              class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetchProducts();
+      });
+
+      function fetchProducts() {
+        fetch("fetch_products.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+            data.forEach((product) => {
+              addProductToList(product);
+            });
+          })
+          .catch((error) => console.error("Error fetching products:", error));
+      }
+
+      function openModal(edit = false, id = null) {
+        document.getElementById("modal").classList.remove("hidden");
+        if (edit) {
+          document.getElementById("modal-title").innerText = "Edit Product";
+          const productList = document.getElementById("product-list").children;
+          const product = Array.from(productList).find((row) =>
+            row
+              .querySelector(".text-blue-600")
+              .getAttribute("onclick")
+              .includes(id)
+          );
+          document.getElementById("product-id").value = id;
+          document.getElementById("product-name").value =
+            product.querySelector(".product-name").innerText;
+          document.getElementById("product-price").value =
+            product.querySelector(".product-price").innerText;
+          document.getElementById("product-color").value =
+            product.querySelector(".product-color").innerText;
+          document.getElementById("product-inventory").value =
+            product.querySelector(".product-inventory").innerText;
+          document.getElementById("product-rating").value =
+            product.querySelector(".product-rating").innerText;
+          document.getElementById("product-image-url").value =
+            product.querySelector(".product-image").src;
+        } else {
+          document.getElementById("modal-title").innerText = "Add Product";
+          document.getElementById("product-form").reset();
+        }
+      }
+
+      function closeModal() {
+        document.getElementById("modal").classList.add("hidden");
+      }
+
+      document
+        .getElementById("product-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(
+            document.getElementById("product-form")
+          );
+
+          fetch("save_product.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                if (document.getElementById("product-id").value) {
+                  updateProductInList(data.product);
+                } else {
+                  addProductToList(data.product);
+                }
+                closeModal();
+                fetchProducts(); // Update product list
+              } else {
+                console.error("Error saving product:", data.message);
+              }
+            })
+            .catch((error) => console.error("Error saving product:", error));
+        });
+
+      function addProductToList(product) {
+        const productList = document.getElementById("product-list");
+        const newRow = document.createElement("tr");
+        newRow.classList.add("hover:bg-gray-50");
+        newRow.setAttribute("data-id", product.id);
+        newRow.innerHTML = `
+          <td class="py-3 px-4"><input type="checkbox" /></td>
+          <td class="py-3 px-4">
+            <div class="flex items-center space-x-2">
+              <img src="${product.product_image_url}" alt="Product" class="w-10 h-10 product-image" />
+              <span class="product-name">${product.product_name}</span>
+            </div>
+          </td>
+          <td class="py-3 px-4 product-inventory">${product.inventory}</td>
+          <td class="py-3 px-4 product-color">${product.product_color}</td>
+          <td class="py-3 px-4 product-price">${product.product_price}</td>
+          <td class="py-3 px-4 product-rating">${product.product_rating}</td>
+          <td class="py-3 px-4 space-x-2">
+            <button class="text-blue-600 hover:text-blue-800" onclick="openModal(true, ${product.id})">✏️</button>
+            <button class="text-red-600 hover:text-red-800" onclick="deleteProduct(${product.id})">🗑️</button>
+          </td>
+        `;
+        productList.appendChild(newRow);
+      }
+
+      function updateProductInList(product) {
+        const productList = document.getElementById("product-list");
+        const productRow = productList.querySelector(
+          `tr[data-id='${product.id}']`
+        );
+        productRow.innerHTML = `
+          <td class="py-3 px-4"><input type="checkbox" /></td>
+          <td class="py-3 px-4">
+            <div class="flex items-center space-x-2">
+              <img src="${product.product_image_url}" alt="Product" class="w-10 h-10 product-image" />
+              <span class="product-name">${product.product_name}</span>
+            </div>
+          </td>
+          <td class="py-3 px-4 product-inventory">${product.inventory}</td>
+          <td class="py-3 px-4 product-color">${product.product_color}</td>
+          <td class="py-3 px-4 product-price">${product.product_price}</td>
+          <td class="py-3 px-4 product-rating">${product.product_rating}</td>
+          <td class="py-3 px-4 space-x-2">
+            <button class="text-blue-600 hover:text-blue-800" onclick="openModal(true, ${product.id})">✏️</button>
+            <button class="text-red-600 hover:text-red-800" onclick="deleteProduct(${product.id})">🗑️</button>
+          </td>
+        `;
+      }
+
+      function deleteProduct(id) {
+        fetch(`delete_product.php?id=${id}`, {
+          method: "GET",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              const productList = document.getElementById("product-list");
+              const productRow = productList.querySelector(
+                `tr[data-id='${id}']`
+              );
+              productList.removeChild(productRow);
+              fetchProducts(); // Update product list
+            } else {
+              console.error("Error deleting product:", data.message);
+            }
+          })
+          .catch((error) => console.error("Error deleting product:", error));
+      }
+    </script>
+  </body>
+</html>
